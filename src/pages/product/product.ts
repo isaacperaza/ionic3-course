@@ -8,7 +8,6 @@ import { NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-// @IonicPage()
 @Component({
   selector: 'page-product',
   templateUrl: 'product.html',
