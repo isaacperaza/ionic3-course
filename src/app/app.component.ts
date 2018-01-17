@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { CategoriesPage } from '../pages/categories/categories';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,7 +13,7 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = CategoriesPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -40,5 +41,13 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  goToHome() {
+    this.nav.popToRoot();
+  }
+
+  goToCategories() {
+    this.nav.push(CategoriesPage);
   }
 }
