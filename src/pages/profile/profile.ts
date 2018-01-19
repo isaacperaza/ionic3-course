@@ -2,33 +2,22 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ProductPage page.
+ * Generated class for the ProfilePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-product',
-  templateUrl: 'product.html',
+  selector: 'page-profile',
+  templateUrl: 'profile.html',
 })
-export class ProductPage {
-
-  product: any;
+export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.product = this.navParams.data;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductPage');
-  }
-
-  back() {
-    this.navCtrl.pop();
-  }
-
-  goToHome() {
-    this.navCtrl.popToRoot();
+    console.log('ionViewDidLoad ProfilePage');
   }
 }

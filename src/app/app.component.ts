@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CategoriesPage } from '../pages/categories/categories';
+import { ProfilePage } from '../pages/profile/profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,5 +50,8 @@ export class MyApp {
 
   goToCategories() {
     this.nav.push(CategoriesPage);
+  }
+  goToProfile() {
+    this.nav.push(ProfilePage);
   }
 }

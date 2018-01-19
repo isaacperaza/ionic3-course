@@ -1,3 +1,16 @@
 page-products {
+    ion-item {
+        ion-row {
+            height: 80px;
+            ion-img {
+                background-color: transparent;
+            }
+        }
 
+        ion-label {
+            p {
+                white-space: normal !important;
+            }
+        }
+    }
 }

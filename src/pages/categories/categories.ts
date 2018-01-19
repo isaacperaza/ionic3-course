@@ -17,13 +17,16 @@ export class CategoriesPage {
 
   categories: any = [{
     id: 1,
-    name: 'Laptops'
+    name: 'Laptops',
+    image: 'https://static.ctonline.mx/img/Thumbs/COMACR6340_100.jpg'
   },{
     id: 2,
-    name: 'Televisiones' 
+    name: 'Televisiones',
+    image: 'https://static.ctonline.mx/imagenes/MONLGE1000/MONLGE1000_400.jpg' 
   },{
     id: 3,
-    name: 'Proyectores'
+    name: 'Proyectores',
+    image: 'https://static.ctonline.mx/img/Thumbs/PROBNQ1480_100.jpg'
   }];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

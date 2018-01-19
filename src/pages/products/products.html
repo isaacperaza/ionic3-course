@@ -15,8 +15,19 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let product of products" (click)="goToProduct(product)">
-      {{ product.name }}
-    </button>  
+    <ion-item ion-item *ngFor="let product of products" (click)="goToProduct(product)">
+      
+      <ion-row align-items-center>
+          <ion-col col-4>
+            <ion-img width="80" height="60" src="{{product.image}}"></ion-img>
+          </ion-col>
+          <ion-col col-8>
+            <h2>{{product.name}}</h2>
+            <br>
+            <p>{{product.shortDescription}}</p>
+          </ion-col>
+        </ion-row>
+    </ion-item> 
+    
   </ion-list>
 </ion-content>
