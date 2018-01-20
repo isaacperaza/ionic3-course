@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { HttpClient } from '@angular/common/http';
 import { ProductPage } from '../product/product';
 
 
@@ -16,50 +17,88 @@ import { ProductPage } from '../product/product';
 })
 export class ProductsPage {
 
-  products: any = [{
-    name: 'Laptop Acer',
-    shortDescription: 'Intel i7 8 GB ram',
-    image: 'https://static.ctonline.mx/img/Thumbs/COMACR6340_100.jpg',
-    fullImage: 'https://static.ctonline.mx/imagenes/PROEPS1360/PROEPS1360_400.jpg',
-    category: 1
-  },{
-    name: 'Macbook Pro',
-    shortDescription: 'Intel i5 18 GB ram',
-    image: 'https://static.ctonline.mx/img/Thumbs/ACCRBT3210_100.jpg',
-    fullImage: 'https://static.ctonline.mx/img/Thumbs/ACCRBT3210_100.jpg',
-    category: 1
-  },{
-    name: 'Lenovo',
-    shortDescription: 'AMD X 8 GB ram',
-    image: 'https://static.ctonline.mx/img/Thumbs/COMLEN6010_100.jpg',
-    fullImage: 'https://static.ctonline.mx/img/Thumbs/COMLEN6010_100.jpg',
-    category: 1
-  },{
-    name: 'LG 40 pulgadas',
-    shortDescription: 'Smart TV ultra',
-    image: 'https://static.ctonline.mx/imagenes/MONLGE1000/MONLGE1000_400.jpg',
-    fullImage: 'https://static.ctonline.mx/imagenes/MONLGE1000/MONLGE1000_400.jpg',
-    category: 2
-  },{
-    name: 'Proyector Epson',
-    shortDescription: 'Cañon color blanco 60x60x20',
-    image: 'https://static.ctonline.mx/img/Thumbs/PROBNQ1480_100.jpg',
-    fullImage: 'https://static.ctonline.mx/img/Thumbs/PROBNQ1480_100.jpg',
-    category: 3
-  }];
+  products: any = [];
+  
 
-  // products: any [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    let data = this.navParams.data;
-    this.products = this.products.filter((product, index) => {
-      return product.category === data.id;
-    });
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public httpClient: HttpClient,
+    public loadingCtrl: LoadingController
+  ) {
+    // let loader = loadingCtrl.create({
+    //   content: 'Cargando productos...',
+    //   spinner: 'dots'
+    // });
+
+    // loader.present();
+
+    // let data = this.navParams.data;
+    // this.products = this.products.filter((product, index) => {
+    //   // console.log(product);
+    //   return product.category === data.id;
+    // });
+    // this.httpClient.get('https://api.myjson.com/bins/lvfd1')
+    //   .subscribe(repsonseData => {
+    //     // Read the result field from the JSON response.
+    //     this.products = repsonseData['data'].filter((product, index) => {
+    //       console.log(product);
+    //       return product.category === data.id;
+    //     });
+
+    //     loader.dismiss();
+    //   });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductsPage');
+    let loader = this.loadingCtrl.create({
+      content: 'Cargando productos...',
+      spinner: 'crescent'
+    });
+
+    loader.present();
+
+    let data = this.navParams.data;
+    this.httpClient.get('https://api.myjson.com/bins/lvfd1')
+    .subscribe(repsonseData => {
+      // Read the result field from the JSON response.
+      this.products = repsonseData['data'].filter((product, index) => {
+        // console.log(product);
+        return product.category === data.id;
+      });
+
+      loader.dismiss();
+    });
   }
+
+  // ionViewWillEnter() {
+  //   console.log('ionViewWillEnter');
+  // }
+
+  // ionViewDidEnter() {
+  //   console.log('ionViewDidEnter');
+  // }
+
+  // ionViewWillLeave() {
+  //   console.log('ionViewWillLeave');
+  // }
+
+  // ionViewDidLeave() {
+  //   console.log('ionViewDidLeave');
+  // }
+
+  // ionViewWillUnload() {
+  //   console.log('ionViewWillUnload');
+  // }
+
+  // ionViewCanEnter() {
+  //   console.log('ionViewCanEnter');
+  // }
+
+  // ionViewCanLeave() {
+  //   console.log('ionViewCanLeave');
+  // }
 
   goToProduct(product) {
     this.navCtrl.push(ProductPage, product);

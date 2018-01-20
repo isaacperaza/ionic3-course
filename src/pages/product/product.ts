@@ -15,6 +15,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class ProductPage {
 
   product: any;
+  productDetails: string = 'specifications';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.product = this.navParams.data;

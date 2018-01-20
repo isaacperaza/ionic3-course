@@ -29,4 +29,28 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-segment [(ngModel)]="productDetails">
+    <ion-segment-button value="specifications">
+      Especificaciones
+    </ion-segment-button>
+    <ion-segment-button value="guaranty">
+      Garantia
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="productDetails">
+    <ion-list *ngSwitchCase="'specifications'">
+      <ul>
+        <li>8 Ram</li>
+        <li>SSD 512 GB</li>
+        <li>15 pulgadas</li>
+        <li>Color Rojo</li>
+      </ul>
+    </ion-list>
+  
+    <ion-list *ngSwitchCase="'guaranty'">
+      <p>Est producto tiene un año de garantia directa con el fabricante</p>
+    </ion-list>
+  </div>
+
 </ion-content>
