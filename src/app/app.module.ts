@@ -10,6 +10,7 @@ import { ProductsPage } from '../pages/products/products';
 import { ProductPage } from '../pages/product/product';
 import { CategoriesPage } from '../pages/categories/categories';
 import { ProfilePage } from '../pages/profile/profile';
+import { ProductsFullPage } from '../pages/products-full/products-full';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ProductsPage,
     ProductPage,
     CategoriesPage,
-    ProfilePage
+    ProfilePage,
+    ProductsFullPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ProductsPage,
     ProductPage,
     CategoriesPage,
-    ProfilePage
+    ProfilePage,
+    ProductsFullPage
   ],
   providers: [
     StatusBar,

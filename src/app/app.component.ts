@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CategoriesPage } from '../pages/categories/categories';
 import { ProfilePage } from '../pages/profile/profile';
+import { ProductsFullPage } from '../pages/products-full/products-full';
 
 @Component({
   templateUrl: 'app.html'
@@ -51,7 +52,12 @@ export class MyApp {
   goToCategories() {
     this.nav.push(CategoriesPage);
   }
+
   goToProfile() {
     this.nav.push(ProfilePage);
+  }
+
+  goToProductsFull() {
+    this.nav.push(ProductsFullPage);
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProductsPage } from '../products/products';
+import { ProductsFullPage } from '../products-full/products-full';
 
 /**
  * Generated class for the CategoriesPage page.
@@ -38,5 +39,9 @@ export class CategoriesPage {
 
   goToCategory(category) {
     this.navCtrl.push(ProductsPage, category);
+  }
+
+  goToProductsFull() {
+    this.navCtrl.push(ProductsFullPage);
   }
 }
