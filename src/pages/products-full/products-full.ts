@@ -69,7 +69,6 @@ export class ProductsFullPage {
     setTimeout(() => {
       this.httpClient.get('https://api.myjson.com/bins/18i4u5')
       .subscribe(repsonseData => {
-        // console.
         // Read the result field from the JSON response.
         this.products = repsonseData['data'];
         this.localProducts = this.products;
@@ -95,7 +94,6 @@ export class ProductsFullPage {
     var message = 'Estas viendo todos los productos';
     
     if (!this.filter) {
-      // this.filterByDisccount();
       this.productsFilter();
       this.presentToast(message);
       return;
@@ -117,9 +115,7 @@ export class ProductsFullPage {
           text: 'Aceptar',
           handler: () => {
             this.productsFilter();
-            // if (!this.filter) {
             message = 'Estas viendo los productos con descuento';
-            // }
             this.presentToast(message);
           }
         }
@@ -143,7 +139,6 @@ export class ProductsFullPage {
           ) || (val === null || val.trim() === '')
         )
       ) {
-        console.log('disccount');
         return true;
       }
     });

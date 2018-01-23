@@ -12,10 +12,10 @@ import { ProductPage } from '../product/product';
  */
 
 @Component({
-  selector: 'page-products',
-  templateUrl: 'products.html',
+  selector: 'page-products-virtual',
+  templateUrl: 'products-virtual.html',
 })
-export class ProductsPage {
+export class ProductsVirtualPage {
 
   products: any = [];
   
@@ -62,8 +62,8 @@ export class ProductsPage {
     // let data = this.navParams.data;
     this.httpClient.get('https://api.myjson.com/bins/u5p3d')
     .subscribe(repsonseData => {
-      // Read the result field from the JSON response.
       this.products = repsonseData['data'];
+      // Read the result field from the JSON response.
       // this.products = repsonseData['data'].filter((product, index) => {
       //   // console.log(product);
       //   return product.category === data.id;

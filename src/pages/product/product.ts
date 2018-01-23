@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
+
 
 /**
  * Generated class for the ProductPage page.
@@ -17,7 +18,11 @@ export class ProductPage {
   product: any;
   productDetails: string = 'specifications';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public events: Events
+  ) {
     this.product = this.navParams.data;
   }
 
@@ -31,5 +36,9 @@ export class ProductPage {
 
   goToHome() {
     this.navCtrl.popToRoot();
+  }
+
+  addToFavorites(product) {
+    this.events.publish('favorites:add', product);
   }
 }

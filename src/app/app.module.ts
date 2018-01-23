@@ -11,6 +11,7 @@ import { ProductPage } from '../pages/product/product';
 import { CategoriesPage } from '../pages/categories/categories';
 import { ProfilePage } from '../pages/profile/profile';
 import { ProductsFullPage } from '../pages/products-full/products-full';
+import { ProductsVirtualPage } from '../pages/products-virtual/products-virtual';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ProductPage,
     CategoriesPage,
     ProfilePage,
-    ProductsFullPage
+    ProductsFullPage,
+    ProductsVirtualPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ProductPage,
     CategoriesPage,
     ProfilePage,
-    ProductsFullPage
+    ProductsFullPage,
+    ProductsVirtualPage
   ],
   providers: [
     StatusBar,

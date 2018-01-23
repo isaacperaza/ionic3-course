@@ -24,6 +24,23 @@
         <ion-icon name="cube" item-start></ion-icon>
         Productos
       </ion-item>
+
+      <ion-item menuClose ion-item (click)="goToProducts()">
+        <ion-icon name="cube" item-start></ion-icon>
+        Productos Normal
+      </ion-item>
+      
+      <ion-item menuClose ion-item (click)="goToProductsVirtual()">
+        <ion-icon name="cube" item-start></ion-icon>
+        Productos Virtual
+      </ion-item>
+    </ion-list>
+
+    <ion-list >
+      <ion-list-header>Mis Favoritos</ion-list-header>
+      <ion-item menuClose *ngFor="let product of favoritesProducts" (click)="goToProduct(product)">
+        {{product.name}}
+      </ion-item>
     </ion-list>
   </ion-content>
 
