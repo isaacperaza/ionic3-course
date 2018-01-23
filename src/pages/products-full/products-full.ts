@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { ProductPage } from '../product/product';
 
@@ -19,6 +19,7 @@ export class ProductsFullPage {
   filter: false;
   products: any = [];
   localProducts: any = [];
+  searchInputText = '';
 
   productsX: any = [
     {"disccount": false, "name": "Laptop Acer", "shortDescription": "Intel i7 8 GB ram", "image": "https://static.ctonline.mx/img/Thumbs/COMACR6340_100.jpg", "fullImage": "https://static.ctonline.mx/imagenes/PROEPS1360/PROEPS1360_400.jpg", "category": 1 }, 
@@ -32,7 +33,9 @@ export class ProductsFullPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public httpClient: HttpClient,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public toastCtrl: ToastController
   ) {
   }
 
@@ -59,26 +62,90 @@ export class ProductsFullPage {
     this.navCtrl.push(ProductPage, product);
   }
 
-  filterByDisccount() {
-    this.localProducts = this.products.filter((product, index) => {
-      return product.disccount === this.filter;
-    });
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.localProducts = [];
+
+    setTimeout(() => {
+      this.httpClient.get('https://api.myjson.com/bins/18i4u5')
+      .subscribe(repsonseData => {
+        // console.
+        // Read the result field from the JSON response.
+        this.products = repsonseData['data'];
+        this.localProducts = this.products;
+        refresher.complete();
+      });
+    }, 1000);
   }
 
-  filterBySearch(ev: any) {
-    // set val to the value of the searchbar
-    let val = ev.target.value;
+  presentToast(userActionMessage) {
+    let toast = this.toastCtrl.create({
+      message: userActionMessage,
+      duration: 3000
+    });
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.localProducts = this.products.filter((item) => {
-        console.log(item);
-        return (item['name'].toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
 
+    toast.present();
+  }
+
+  confirmFilterByDiscount() {
+    var message = 'Estas viendo todos los productos';
+    
+    if (!this.filter) {
+      // this.filterByDisccount();
+      this.productsFilter();
+      this.presentToast(message);
       return;
     }
 
+    let confirm = this.alertCtrl.create({
+      title: 'Filtar por Descuento?',
+      message: 'Estas seguro que deseas mostar solo los productos con descuento',
+      // enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            this.filter = false;
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.productsFilter();
+            // if (!this.filter) {
+            message = 'Estas viendo los productos con descuento';
+            // }
+            this.presentToast(message);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  productsFilter() {
     this.localProducts = this.products;
+    let val = this.searchInputText;
+
+    this.localProducts = this.products.filter((item) => {
+      if (
+        ((this.filter && item['disccount']) || !this.filter)
+        &&
+        (
+          (
+            val.trim() != '' &&
+            item['name'].toLowerCase().indexOf(val.toLowerCase()) > -1
+          ) || (val === null || val.trim() === '')
+        )
+      ) {
+        console.log('disccount');
+        return true;
+      }
+    });
   }
 }

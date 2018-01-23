@@ -7,32 +7,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-searchbar placeholder="Busqueda" (ionInput)="filterBySearch($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Busqueda" [(ngModel)]="searchInputText" (ionInput)="productsFilter($event)"></ion-searchbar>
   </ion-navbar>
 
   <ion-toolbar>
     <ion-item no-lines>
       <ion-label>Descuento</ion-label>
-      <ion-toggle [(ngModel)]="filter" color="secondary" (ionChange)="filterByDisccount()"></ion-toggle>
+      <ion-toggle [(ngModel)]="filter" color="secondary" (ionChange)="confirmFilterByDiscount()"></ion-toggle>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
     <ion-item ion-item *ngFor="let product of localProducts" (click)="goToProduct(product)">
-      
+
       <ion-row align-items-center>
-          <ion-col col-4>
-            <img width="80" height="60" src="{{product.fullImage}}" />
-          </ion-col>
-          <ion-col col-8>
-            <h2>{{product.name}}</h2>
-            <br>
-            <p>{{product.shortDescription}}</p>
-          </ion-col>
-        </ion-row>
-    </ion-item> 
-    
+        <ion-col col-4>
+          <img width="80" height="60" src="{{product.fullImage}}" />
+        </ion-col>
+        <ion-col col-8>
+          <h2>{{product.name}}</h2>
+          <br>
+          <p>{{product.shortDescription}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
   </ion-list>
 </ion-content>
