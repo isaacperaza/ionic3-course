@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Vibration } from '@ionic-native/vibration';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
@@ -11,6 +12,7 @@ import { ProductsFullPage } from '../pages/products-full/products-full';
 import { ProductsPage } from '../pages/products/products';
 import { ProductPage } from '../pages/product/product';
 import { ProductsVirtualPage } from '../pages/products-virtual/products-virtual';
+import { GeolocationPage } from '../pages/geolocation/geolocation';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +29,8 @@ export class MyApp {
     public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
-    public events: Events
+    public events: Events,
+    private vibration: Vibration
   ) {
     this.initializeApp();
 
@@ -40,7 +43,11 @@ export class MyApp {
   }
 
   initializeApp() {
+
+
     this.platform.ready().then(() => {
+
+      console.log(this.platform.is('cordova'));
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -83,12 +90,18 @@ export class MyApp {
     this.nav.push(ProductPage, product);
   }
 
+  goToGeoLocation() {
+    this.nav.push(GeolocationPage);
+  }
+
+
   suscribeToFavorites() {
     this.events.subscribe('favorites:add', (product) => {
       // user and time are the same arguments passed in `events.publish(user, time)`
       console.log('suscribeToFavorites');
       console.log(product);
       this.favoritesProducts.push(product);
+      this.vibration.vibrate(1000);
     });
   }
 }

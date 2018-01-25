@@ -16,6 +16,15 @@
 <ion-content padding>
 
   <ion-list>
+
+    <ion-item *ngIf="photo != ''">
+      <img src="{{photo}}" alt="Foto de perfil">
+    </ion-item>
+
+    <ion-item>
+      <button ion-button (click)="takePicture()">Tomar Foto</button>
+    </ion-item>
+
     <ion-item>
       <ion-label floating>Nombre</ion-label>
       <ion-input type="text"></ion-input>
@@ -29,6 +38,15 @@
     <ion-item>
       <ion-label floating>Dirección</ion-label>
       <ion-input type="password"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+        <p>{{productScan}}</p>
+    </ion-item>
+
+    <ion-item>
+        <button ion-button (click)="scan()">Scan</button>
     </ion-item>
 
   </ion-list>
